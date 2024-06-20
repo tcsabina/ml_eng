@@ -1,9 +1,3 @@
-Install required libraries:
+###Install required libraries:
 
-pip install numpy
-pip install pandas
-pip install matplotlib
-pip install seaborn
-pip install plotly
-pip install scikit-learn
-pip install requests
+pip install numpy pandas matplotlib seaborn plotly scikit-learn requests
