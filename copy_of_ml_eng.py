@@ -431,12 +431,12 @@ data_acquisition.download_and_extract()
 
 # Define the paths to the required CSV files
 file_paths = {
-    'admissions': '/content/mimic-iii-clinical-database-demo-1.4/ADMISSIONS.csv',
-    'patients': '/content/mimic-iii-clinical-database-demo-1.4/PATIENTS.csv',
-    'callout': '/content/mimic-iii-clinical-database-demo-1.4/CALLOUT.csv',
-    'icustays': '/content/mimic-iii-clinical-database-demo-1.4/ICUSTAYS.csv',
-    'drgcodes': '/content/mimic-iii-clinical-database-demo-1.4/DRGCODES.csv',
-    'services': '/content/mimic-iii-clinical-database-demo-1.4/SERVICES.csv'}
+    'admissions': 'mimic-iii-clinical-database-demo-1.4/ADMISSIONS.csv',
+    'patients': 'mimic-iii-clinical-database-demo-1.4/PATIENTS.csv',
+    'callout': 'mimic-iii-clinical-database-demo-1.4/CALLOUT.csv',
+    'icustays': 'mimic-iii-clinical-database-demo-1.4/ICUSTAYS.csv',
+    'drgcodes': 'mimic-iii-clinical-database-demo-1.4/DRGCODES.csv',
+    'services': 'mimic-iii-clinical-database-demo-1.4/SERVICES.csv'}
 
 
 # Create an instance of DataFrameLoader and load the data
@@ -532,8 +532,6 @@ model_trainer.evaluate(is_classifier=False)
 model_trainer.plot_actual_vs_predicted()
 model_trainer.plot_residuals_histogram()
 
-from google.colab import drive
-drive.mount('/content/drive')
 
 print("Number of entries in the dataframe:", patients_df.shape[0])
 
