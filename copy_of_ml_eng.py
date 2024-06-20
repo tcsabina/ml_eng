@@ -1,17 +1,8 @@
-# Standard library imports
-import glob
-import datetime
-from datetime import date
-
 # Third-party library imports for data handling
 import pandas as pd
 
 # Visualization libraries
-import matplotlib.ticker as ticker
 import matplotlib.pyplot as plt
-import plotly.express as px
-import seaborn as sns
-
 
 # Machine learning and model evaluation imports from scikit-learn
 from sklearn.linear_model import LogisticRegression
