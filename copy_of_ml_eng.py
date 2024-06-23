@@ -173,15 +173,3 @@ plt.ylabel('Number of Entries')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
-
-# Extract year from dobdatetime
-patients_df['dob_year'] = patients_df['dobdatetime'].dt.year
-
-# Plot histogram by year
-plt.figure(figsize=(10, 6))
-patients_df['dob_year'].plot(kind='hist', bins=210, color='skyblue')
-plt.title('DOB Entries by Year')
-plt.xlabel('Year')
-plt.ylabel('Number of Entries')
-plt.tight_layout()
-plt.show()
