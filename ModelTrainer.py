@@ -96,6 +96,7 @@ class ModelTrainer:
             results['rmse'] = np.sqrt(results['mse'])
 
         self.results = results
+
         return results
 
     def plot_confusion_matrix(self):
