@@ -14,12 +14,13 @@ class DataPreprocessor:
         :return: A processed pandas dataframe.
         """
         # Merge dataframes
-        patient_df = self.dataframes['patients']
+        print("Merging DataFrames...")
         admission_df = self.dataframes['admissions']
-        icustays_df = self.dataframes['icustays']
-        drgcodes_df = self.dataframes['drgcodes']
-        services_df = self.dataframes['services']
         callout_df = self.dataframes['callout']
+        drgcodes_df = self.dataframes['drgcodes']
+        icustays_df = self.dataframes['icustays']
+        patient_df = self.dataframes['patients']
+        services_df = self.dataframes['services']
 
         patient_df = patient_df.merge(admission_df, on="subject_id", how="left", suffixes=('_patient', '_admission')) \
                        .merge(callout_df, on=["subject_id", "hadm_id"], how="left", suffixes=('_admission', '_callout')) \
@@ -29,7 +30,7 @@ class DataPreprocessor:
 
         # Drop empty and unnecessary columns
         patient_df.dropna(how="all", axis="columns", inplace=True)
-        print(patient_df.columns.tolist())
+#        print(patient_df.columns.tolist())
 
 
         columns_to_drop = [

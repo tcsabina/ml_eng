@@ -1,7 +1,17 @@
 import pandas as pd
 
+# Define the paths to the required CSV files
+file_paths = {
+    'admissions': 'mimic-iii-clinical-database-demo-1.4/ADMISSIONS.csv',
+    'callout': 'mimic-iii-clinical-database-demo-1.4/CALLOUT.csv',
+    'drgcodes': 'mimic-iii-clinical-database-demo-1.4/DRGCODES.csv',
+    'icustays': 'mimic-iii-clinical-database-demo-1.4/ICUSTAYS.csv',
+    'patients': 'mimic-iii-clinical-database-demo-1.4/PATIENTS.csv',
+    'services': 'mimic-iii-clinical-database-demo-1.4/SERVICES.csv'}
+
+
 class DataFrameLoader:
-    def __init__(self, file_paths):
+    def __init__(self):
         """
         Initialize the DataFrameLoader with a dictionary of file paths.
 
@@ -18,14 +28,15 @@ class DataFrameLoader:
                  in the file_paths dictionary.
         """
         dataframes = {}
+        print("Loading into pandas DataFrames...")
         for key, path in self.file_paths.items():
             try:
                 dataframes[key] = pd.read_csv(path)
-                print(f"{key} loaded successfully.")
+                print(f"  {key} loaded successfully.")
             except FileNotFoundError as e:
-                print(f"Error loading {key}: {e}")
+                print(f"  Error loading {key}: {e}")
             except pd.errors.ParserError as e:
-                print(f"Error parsing {key}: {e}")
+                print(f"  Error parsing {key}: {e}")
             except Exception as e:
-                print(f"Unexpected error loading {key}: {e}")
+                print(f"  Unexpected error loading {key}: {e}")
         return dataframes

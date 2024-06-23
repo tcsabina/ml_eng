@@ -19,31 +19,18 @@ import ModelTrainer
 # URL of the file to be downloaded
 url = "https://physionet.org/static/published-projects/mimiciii-demo/mimic-iii-clinical-database-demo-1.4.zip"
 
-# Create an instance of DataAcquisition
+# Create an instance of DataAcquisition and download and extract the demo data
 data_acquisition = DataAcquisition.DataAcquisition(url)
-
-# Call download_and_extract method to download and extract the file
 data_acquisition.download_and_extract()
 
-# Define the paths to the required CSV files
-file_paths = {
-    'admissions': 'mimic-iii-clinical-database-demo-1.4/ADMISSIONS.csv',
-    'patients': 'mimic-iii-clinical-database-demo-1.4/PATIENTS.csv',
-    'callout': 'mimic-iii-clinical-database-demo-1.4/CALLOUT.csv',
-    'icustays': 'mimic-iii-clinical-database-demo-1.4/ICUSTAYS.csv',
-    'drgcodes': 'mimic-iii-clinical-database-demo-1.4/DRGCODES.csv',
-    'services': 'mimic-iii-clinical-database-demo-1.4/SERVICES.csv'}
-
-
 # Create an instance of DataFrameLoader and load the data
-loader = DataFrameLoader.DataFrameLoader(file_paths)
+loader = DataFrameLoader.DataFrameLoader()
 dataframes = loader.load_dataframes()
 
-# Instantiate DataPreprocessor()
+# Create an instance of DataPreprocessor and invoke the preprocess method to perform all the preprocessing steps
 preprocessor = DataPreprocessor.DataPreprocessor(dataframes)
-
-# Invoke the preprocess method to perform all the preprocessing steps
 patients_df = preprocessor.preprocess()
+
 
 # Initialize the DataVisualizer with your processed dataframe
 visualizer = DataVisualizer.DataVisualizer(patients_df)
