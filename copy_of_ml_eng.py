@@ -114,29 +114,3 @@ model_trainer.train()
 model_trainer.evaluate(is_classifier=False)
 model_trainer.plot_actual_vs_predicted()
 model_trainer.plot_residuals_histogram()
-
-
-print("Number of entries in the dataframe:", patients_df.shape[0])
-
-# Extract month from admittime
-print(type(patients_df['admittime']))
-patients_df['admittimedate'] = pd.to_datetime(patients_df['admittime'])
-
-# Extract the month and create 'admittime_month' column
-patients_df['admittime_month'] = patients_df['admittimedate'].dt.month_name() # Create the column with month names
-
-# Define the order of months
-month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-# Convert month to categorical data with specified order
-patients_df['admittime_month'] = pd.Categorical(patients_df['admittime_month'], categories=month_order, ordered=True)
-
-# Plot histogram sorted by month
-plt.figure(figsize=(10, 6))
-patients_df['admittime_month'].value_counts().sort_index().plot(kind='bar', color='skyblue')
-plt.title('Admissions by Month')
-plt.xlabel('Month')
-plt.ylabel('Number of Admissions')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
