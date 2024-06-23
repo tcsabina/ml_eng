@@ -140,36 +140,3 @@ plt.ylabel('Number of Admissions')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
-
-# since 'dob' is not in datetime format, convert it first
-patients_df['dobdatetime'] = pd.to_datetime(patients_df['dob'])
-
-# Extract month from dob
-patients_df['dob_month'] = patients_df['dobdatetime'].dt.month_name()
-
-# Define the order of months
-month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-# Convert month to categorical data with specified order
-patients_df['dob_month'] = pd.Categorical(patients_df['dob_month'], categories=month_order, ordered=True)
-
-# Count the number of entries for each month
-entries_per_month = patients_df['dob_month'].value_counts().sort_index()
-
-# Calculate the percentage of entries for each month
-percentage_per_month = entries_per_month / len(patients_df) * 100
-
-# Plot histogram sorted by month
-plt.figure(figsize=(10, 6))
-ax = entries_per_month.plot(kind='bar', color='skyblue')
-
-# Annotate each bar with the corresponding percentage
-for i, v in enumerate(percentage_per_month):
-    ax.text(i, entries_per_month[i] + 0.5, f'{v:.1f}%', ha='center', va='bottom', fontsize=8)
-
-plt.title('DOB Entries by Month')
-plt.xlabel('Month')
-plt.ylabel('Number of Entries')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
