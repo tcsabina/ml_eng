@@ -1,3 +1,6 @@
+# Third-party library imports for data handling
+import pandas as pd
+
 class DataPreprocessor:
     def __init__(self, dataframes):
         """
@@ -14,7 +17,7 @@ class DataPreprocessor:
         :return: A processed pandas dataframe.
         """
         # Merge dataframes
-        print("Merging DataFrames...")
+        print("Preprocessing DataFrames...")
         admission_df = self.dataframes['admissions']
         callout_df = self.dataframes['callout']
         drgcodes_df = self.dataframes['drgcodes']
@@ -31,8 +34,6 @@ class DataPreprocessor:
         # Drop empty and unnecessary columns
         patient_df.dropna(how="all", axis="columns", inplace=True)
 #        print(patient_df.columns.tolist())
-
-
         columns_to_drop = [
             "row_id_x",
             "row_id_y",
@@ -75,4 +76,27 @@ class DataPreprocessor:
         patient_df["deathtime"] = patient_df["deathtime"].fillna(
             patient_df["dod"])
 
+        # Function to calculate age
+        patient_df["admittime"] = pd.to_datetime(patient_df["admittime"])
+        patient_df["dob"] = pd.to_datetime(patient_df["dob"])
+        patient_df["age"] = patient_df.apply(lambda row: self.calculate_age(row["admittime"], row["dob"]), axis=1)
+
         return patient_df
+
+    def calculate_age(self, admittime, dob):
+        """
+        Calcualte age of patient.
+
+        :param admittime: Admission datetime (pd.Timestamp)
+        :param dob: Date of birth (pd.Timestamp)
+        :return: The calculated age.
+        """
+        admittime = admittime.to_pydatetime()
+        dob = dob.to_pydatetime()
+
+        age_difference = admittime - dob
+        age_in_days = age_difference.days
+        age_in_years = age_in_days / 365.25  # Consider leap years
+        age_in_years_int = int(age_in_years)  # Convert to integer
+
+        return age_in_years_int

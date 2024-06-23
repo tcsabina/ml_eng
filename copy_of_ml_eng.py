@@ -23,33 +23,23 @@ url = "https://physionet.org/static/published-projects/mimiciii-demo/mimic-iii-c
 data_acquisition = DataAcquisition.DataAcquisition(url)
 data_acquisition.download_and_extract()
 
+
 # Create an instance of DataFrameLoader and load the data
 loader = DataFrameLoader.DataFrameLoader()
 dataframes = loader.load_dataframes()
+
 
 # Create an instance of DataPreprocessor and invoke the preprocess method to perform all the preprocessing steps
 preprocessor = DataPreprocessor.DataPreprocessor(dataframes)
 patients_df = preprocessor.preprocess()
 
 
-# Initialize the DataVisualizer with your processed dataframe
+# Create an instance of DataVisualizer and show plots
 visualizer = DataVisualizer.DataVisualizer(patients_df)
-
-# To plot patient outcomes by admission type
 visualizer.plot_patient_outcomes_by_admission_type()
-
-# To plot average length of stay by admission type and insurance
 visualizer.plot_average_los_by_admission_and_insurance()
 
-# Function to calculate age
-def calculate_age(row):
-    dob = pd.to_datetime(row["dob"]).to_pydatetime()
-    admittime = pd.to_datetime(row["admittime"]).to_pydatetime()
-    age = (admittime - dob).days // 365
-    return age
 
-
-patients_df["age"] = patients_df.apply(calculate_age, axis=1)
 features = [
     "age",
     "gender",
