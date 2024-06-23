@@ -56,7 +56,7 @@ class DataVisualizer:
         grouped_data = self.dataframe.groupby(['admission_type', 'insurance'])[
             'los'].mean().reset_index()
 
-        plt.figure(figsize=(12, 8))
+        plt.figure(figsize=(10, 6))
         sns.barplot(
             x='admission_type',
             y='los',
