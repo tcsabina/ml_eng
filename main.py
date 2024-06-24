@@ -36,8 +36,8 @@ patients_df = preprocessor.preprocess()
 
 # Create an instance of DataVisualizer and show plots
 visualizer = DataVisualizer.DataVisualizer(patients_df)
-visualizer.plot_patient_outcomes_by_admission_type() # for Requirement 1
-visualizer.plot_average_los_by_admission_and_insurance() # for Requirement 1
+#visualizer.plot_patient_outcomes_by_admission_type() # for Requirement 3
+#visualizer.plot_average_los_by_admission_and_insurance() # for Requirement 1
 
 
 # Prepare for model training
@@ -61,8 +61,8 @@ categorical_features = [
 ]
 numerical_features = ["age", "los"]
 X = patients_df[features]
-y = patients_df["hospital_expire_flag"]
 
+y = patients_df["hospital_expire_flag"]
 # Train the model on the basis of X and target y prepared above
 model_trainer = ModelTrainer.ModelTrainer(LogisticRegression(),
                              X, y,
@@ -92,6 +92,23 @@ model_trainer = ModelTrainer.ModelTrainer(RandomForestRegressor(),
 model_trainer.train()
 # Assuming evaluate method adapts based on is_classifier flag
 metrics = model_trainer.evaluate(is_classifier=False)
-print(metrics)
+#print(metrics)
 model_trainer.plot_actual_vs_predicted()
 model_trainer.plot_residuals_histogram()
+
+patient_data_dict = {
+    "age": 45,
+    "gender": "Female",
+    "admission_type": "emergency",
+    "admission_location": "transfer from hosp/extram",
+    "insurance": "medicare",
+    "ethnicity": "black/african american",
+    "last_careunit": "micu",
+    "los": 0,
+}
+
+# Convert the dictionary to a single-row DataFrame
+patient_data = pd.DataFrame(patient_data_dict, index=[0])
+
+# Call the function to predict LOS for this patient
+model_trainer.predicted_one_person(patient_data)

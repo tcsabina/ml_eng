@@ -155,6 +155,23 @@ class ModelTrainer:
         plt.legend(loc="lower right")
         plt.show()
 
+    def predicted_one_person(self, patient_data):
+        """
+        Predicts LOS for a single patient using the trained model.
+
+         :param patient_data: A pandas DataFrame row containing features for the patient.
+        """
+        if not hasattr(self, 'model'):
+           raise ValueError("Model must be trained before plotting.")
+
+        # Preprocess the patient data using the same pipeline
+        transformed_data = self.preprocessor.transform(patient_data)
+
+        # Make a prediction on the transformed data
+        predicted_los = self.model.predict(transformed_data)[0]
+
+        print("Predicted Length of Stay:", predicted_los, "days")
+
     def plot_actual_vs_predicted(self):
         """
         Plots Actual vs. Predicted values for the regression model.
