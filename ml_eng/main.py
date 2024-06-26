@@ -96,6 +96,7 @@ metrics = model_trainer.evaluate(is_classifier=False)
 model_trainer.plot_actual_vs_predicted()
 model_trainer.plot_residuals_histogram()
 
+
 patient_data_dict = {
     "age": 45,
     "gender": "Female",

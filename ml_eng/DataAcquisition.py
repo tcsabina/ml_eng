@@ -23,4 +23,4 @@ class DataAcquisition:
         response.raise_for_status()
         print("Unzipping file...")
         zip_file = zipfile.ZipFile(BytesIO(response.content))
-        zip_file.extractall()
+        zip_file.extractall("data")

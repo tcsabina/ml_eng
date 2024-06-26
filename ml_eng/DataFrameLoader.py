@@ -2,12 +2,12 @@ import pandas as pd
 
 # Define the paths to the required CSV files
 file_paths = {
-    'admissions': 'mimic-iii-clinical-database-demo-1.4/ADMISSIONS.csv',
-    'callout': 'mimic-iii-clinical-database-demo-1.4/CALLOUT.csv',
-    'drgcodes': 'mimic-iii-clinical-database-demo-1.4/DRGCODES.csv',
-    'icustays': 'mimic-iii-clinical-database-demo-1.4/ICUSTAYS.csv',
-    'patients': 'mimic-iii-clinical-database-demo-1.4/PATIENTS.csv',
-    'services': 'mimic-iii-clinical-database-demo-1.4/SERVICES.csv'}
+    'admissions': 'data\mimic-iii-clinical-database-demo-1.4/ADMISSIONS.csv',
+    'callout': 'data\mimic-iii-clinical-database-demo-1.4/CALLOUT.csv',
+    'drgcodes': 'data\mimic-iii-clinical-database-demo-1.4/DRGCODES.csv',
+    'icustays': 'data\mimic-iii-clinical-database-demo-1.4/ICUSTAYS.csv',
+    'patients': 'data\mimic-iii-clinical-database-demo-1.4/PATIENTS.csv',
+    'services': 'data\mimic-iii-clinical-database-demo-1.4/SERVICES.csv'}
 
 
 class DataFrameLoader:
