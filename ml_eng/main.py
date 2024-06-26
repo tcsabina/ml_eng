@@ -59,31 +59,15 @@ categorical_features = [
     "ethnicity",
     "last_careunit",
 ]
-numerical_features = ["age", "los"]
-X = patients_df[features]
-
-y = patients_df["hospital_expire_flag"]
-# Train the model on the basis of X and target y prepared above
-model_trainer = ModelTrainer.ModelTrainer(LogisticRegression(),
-                             X, y,
-                             categorical_features,
-                             numerical_features)
-model_trainer.train()
-metrics = model_trainer.evaluate(is_classifier=True)
-print(metrics)
-model_trainer.plot_confusion_matrix()
-model_trainer.plot_roc_curve()
-
-
-# Make sure 'los' is not listed in numeric_features
 numerical_features = ["age"]
+X = patients_df[features]
+y = patients_df["los"].values  # Directly accessing 'los' values
 
 # In the following we want to pre-process data to build a RandomForest regressor
 # to estimate the Length of Stay (los) of patients in the hospital
 
 # Splitting the dataset ensuring 'los' is used as target
 # features should be defined as before, excluding 'los'
-y = patients_df["los"].values  # Directly accessing 'los' values
 
 model_trainer = ModelTrainer.ModelTrainer(RandomForestRegressor(),
                              X, y,
@@ -93,10 +77,12 @@ model_trainer.train()
 # Assuming evaluate method adapts based on is_classifier flag
 metrics = model_trainer.evaluate(is_classifier=False)
 #print(metrics)
+#model_trainer.plot_confusion_matrix()
+#model_trainer.plot_roc_curve()
 model_trainer.plot_actual_vs_predicted()
 model_trainer.plot_residuals_histogram()
 
-
+# Executing prediction for LOS (Length of Stay) for a sample person
 patient_data_dict = {
     "age": 45,
     "gender": "Female",
